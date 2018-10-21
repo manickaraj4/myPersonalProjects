@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+<div id ="sec1" style="width:30%">
+<p>Add a Section:</p><br>
+<input type="text" id="sec"><br>
+<button onclick="addsec()">Add </button><br>
+<p>Entered sections are:</p>
+<ul></ul>
+
+</div>
+<div id ="sec2" style="width:30%">
+    <p>Add a Subject:</p><br>
+    <input type="text" id="sub"><br>
+    <button onclick="addsub()">Add </button><br>
+    <p>Entered subjects are:</p>
+    <ul></ul>
+</div>
+<div id ="sec3" style="width:30%">
+    <p>Add a Staff Name:</p><br>
+<input type="text" id="staff"><br>
+<button onclick="addstaff()">Add </button><br>
+<p>Entered Staff members are:</p>
+<ul></ul></div>
+</div style="width:90%">
+
+    <a onclick="store()" href ="map.html"> Next </a>
+</div>
+
+<script>
+    const sections=new Array();
+    const subjects=new Array();
+    const staffs=new Array();
+function addsec(){
+    var val =document.getElementById("sec").value;
+    sections.push(val);
+    var li = document.createElement("li");
+    var sec=document.getElementById("sec1");
+    var ul=sec.getElementsByTagName("ul");
+
+    li.innerHTML=val;
+    ul[0].appendChild(li);
+    
+
+
+}
+
+function addsub(){
+    var val =document.getElementById("sub").value;
+    subjects.push(val);
+    var li = document.createElement("li");
+    var sec=document.getElementById("sec2");
+    var ul=sec.getElementsByTagName("ul");
+
+    li.innerHTML=val;
+    ul[0].appendChild(li);
+    
+
+
+}
+function addstaff(){
+    var val =document.getElementById("staff").value;
+    staffs.push(val);
+    var li = document.createElement("li");
+    var sec=document.getElementById("sec3");
+    var ul=sec.getElementsByTagName("ul");
+
+    li.innerHTML=val;
+    ul[0].appendChild(li);
+    
+
+
+}
+function store(){
+    sessionStorage.setItem("sections",JSON.stringify(sections));
+    sessionStorage.setItem("subjects",JSON.stringify(subjects));
+    sessionStorage.setItem("staffs",JSON.stringify(staffs));
+    
+}
+  
+
+</script>
+
+
+
+</body>
+</html>

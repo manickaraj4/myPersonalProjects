@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+<div>
+    <p>Map the subjects with sections and staffs</p>
+    <p> Select Staff </p>
+    <select id ="staffs" style="width:95%;height:25px">
+       
+    </select>
+    <p> Select Subject </p>
+    <select id ="subjects" style="width:95%;height:25px">
+       
+    </select>
+    <p> Select Section </p>
+    <select id ="sections" style="width:95%;height:25px">
+       
+    </select>
+    <button onclick="mapmodules()"> Map the modules </button><br>
+    <a onclick="create()" href="index.html">Next</a>
+</div>
+<div>
+    <p> Entered Modules are </p>
+</div>
+<script>
+     function module(staff,sub,sec){
+            this.name=staff;
+            this.subject=sub;
+            this.section=sec;
+        }
+        const map=new Array();
+var sections =JSON.parse(sessionStorage.getItem("sections"));
+var staffs =JSON.parse(sessionStorage.getItem("staffs"));
+var subjects =JSON.parse(sessionStorage.getItem("subjects"));
+
+    for(i=0;i<sections.length;i++){
+       var l= document.getElementById("sections");
+       var opt=document.createElement("option");
+       opt.innerHTML=sections[i];
+       l.appendChild(opt);
+    }
+
+  for(staff of staffs){
+       var l= document.getElementById("staffs");
+       var opt=document.createElement("option");
+       opt.innerHTML=staff;
+       l.appendChild(opt);
+    }
+
+    for(subject of subjects){
+       var l= document.getElementById("subjects");
+       var opt=document.createElement("option");
+       opt.innerHTML=subject;
+       l.appendChild(opt);
+    }
+
+    function mapmodules(){
+        var staffname=document.getElementById("staffs").value;
+        var subjectname=document.getElementById("subjects").value;
+        var sectionname=document.getElementById("sections").value;
+       
+        var tempmod=new module(staffname,subjectname,sectionname);
+        map.push(tempmod);
+        var tempp=document.createElement("p");
+        tempp.innerHTML=staffname+" is taking "+subjectname+" for the section "+sectionname;
+        var divs=document.getElementsByTagName("div");
+        divs[1].appendChild(tempp);
+        
+    }
+    function create(){
+        var mods=JSON.stringify(map);
+        sessionStorage.setItem("map",mods);
+        
+    }
+</script>
+    </body>
+    </html>

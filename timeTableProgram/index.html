@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello World</title>
+	
+	
+	<link rel="stylesheet" href="style.css">
+</head>
+
+	
+
+
+<body id ="body">
+
+		<script>
+			
+				const noofhours =35;
+				const body = document.body;
+				var mods =sessionStorage.getItem("map");
+				var staffs=JSON.parse(sessionStorage.getItem("staffs"));
+				var refmap=new Array(noofhours);
+				for(i=0;i<refmap.length;i++){
+					refmap[i]=new Array();
+				}
+				
+				const col =JSON.parse(mods);
+			
+				const sections =new Set();
+				for(mod of col)
+				sections.add(mod.section);
+		
+				
+				for(sec of sections){
+
+						
+						var sect = document.createElement("div");
+						sect.setAttribute("id",sec);
+						var heading = document.createElement("p");
+						heading.innerHTML="Section "+sec;
+						sect.appendChild(heading);
+						body.appendChild(sect);
+					
+					
+			
+				}
+				for(staff of staffs){
+					var sta =document.createElement("div");
+					sta.setAttribute("id",staff);
+					var heading = document.createElement("p");
+						heading.innerHTML="Work Load for "+staff;
+						sta.appendChild(heading);
+						for(i=0;i<noofhours;i++){
+					var label =document.createElement("label");
+					        label.setAttribute("name",i);
+							label.innerHTML="---";
+							sta.appendChild(label);
+						}
+						body.appendChild(sta);
+
+				}
+				
+				
+				for(sec of sections){
+					var tempdiv = document.getElementById(sec);
+					for(i=0;i<noofhours;i++){
+				var sel = document.createElement("select");
+						sel.setAttribute("onchange","check(event)");
+						sel.setAttribute("name",i);
+					tempdiv.appendChild(sel);}
+				}
+
+				for(sec of sections){
+					var tempdiv = document.getElementById(sec);
+							var childs=tempdiv.childNodes;
+				for(i=0;i<noofhours;i++){
+								
+								var opt= document.createElement("option");
+									opt.innerHTML="---";
+									opt.nodeValue="notSelected";
+									childs[i+1].appendChild(opt);
+								}
+				}
+				for(mod of col){
+				
+					
+					for(sec of sections){
+					
+						if(sec==mod.section){
+							var tempdiv = document.getElementById(sec);
+							var childs=tempdiv.childNodes;
+							
+							
+
+							for(i=0;i<noofhours;i++){
+								
+							var opt= document.createElement("option");
+								opt.innerHTML=mod.subject;
+								opt.nodeValue=mod.subject;
+								childs[i+1].appendChild(opt);
+							}
+						}
+						
+					}
+					
+
+				}
+				function check(event){
+						
+
+						var tempsec=event.target.parentNode;
+						 var tempid=tempsec.getAttribute("id");
+						 var tempvalue =event.target.value;
+						 var tempname=new String();
+						 var tempselname=event.target.getAttribute("name");
+
+
+
+						 if(tempvalue!="---"){
+							var tempsubject=new String();
+									var tempname= new String();
+									
+									var temparray=refmap[tempselname];
+									
+
+									
+										var chec=new Boolean();
+									for(el of temparray){
+										if(el.section==tempid)
+											chec=true;
+									}
+									
+									if(chec==true){
+									for(ele of temparray){
+										if(ele.section==tempid){
+											tempsubject=ele.subject;
+											tempname=ele.name;
+
+											var index=temparray.indexOf(ele);
+											temparray.splice(index,1);
+											
+										}
+										
+									}
+									for(sec of sections){
+
+										if(tempid!=sec){
+											var mosub=new String();
+											var tempd =document.getElementById(sec);
+											var chi =tempd.childNodes;
+											for(ch of chi){
+											if(ch.getAttribute("name")==tempselname){
+												for(mod of col){
+													if(mod.name==tempname&&mod.section==sec)
+													mosub=mod.subject;
+												}
+												var opt=document.createElement("option");
+												opt.innerHTML=mosub;
+												opt.setAttribute("value",mosub);
+												ch.appendChild(opt);
+											}
+										}	
+
+
+										}
+
+
+									}
+									
+										
+											var tempdi=document.getElementById(tempname);
+											var chi=tempdi.childNodes;
+											for(ch of chi){
+												if(ch.getAttribute("name")==tempselname){
+													ch.innerHTML="---";
+												}
+											}}
+						 for(mod of col){
+							 if(mod.subject==tempvalue&&mod.section==tempid){
+								tempname=mod.name;
+								refmap[tempselname].push(mod);
+								
+								var staffdiv=document.getElementById(tempname);
+								var staffchild=staffdiv.childNodes;
+								for(stach of staffchild){
+									if(stach.getAttribute("name")==tempselname)
+									stach.innerHTML=tempvalue+" "+tempid;
+								}
+												
+						 }	
+						 }
+								for(sec of sections){
+
+									if(tempid!=sec)
+									{ 
+										var tempd =document.getElementById(sec);
+										var chi =tempd.childNodes;
+										for(ch of chi){
+											if(ch.getAttribute("name")==tempselname){
+												var chy=ch.childNodes;
+												for(c of chy){
+													
+													for(mod of col){
+														if(mod.subject==c.value&&mod.section==sec)
+														{ 
+															if(mod.name==tempname){
+																ch.removeChild(c);
+															}
+														}
+													}
+												}
+											}
+										}
+										
+
+
+									}
+
+
+
+
+								}}
+								else{
+									var tempsubject=new String();
+									var tempname= new String();
+									
+									var temparray=refmap[tempselname];
+									for(ele of temparray){
+										if(ele.section==tempid){
+											tempsubject=ele.subject;
+											tempname=ele.name;
+
+											var index=temparray.indexOf(ele);
+											temparray.splice(index,1);
+											
+										}
+										
+									}
+									for(sec of sections){
+
+										if(tempid!=sec){
+											var mosub=new String();
+											var tempd =document.getElementById(sec);
+											var chi =tempd.childNodes;
+											for(ch of chi){
+											if(ch.getAttribute("name")==tempselname){
+												for(mod of col){
+													if(mod.name==tempname&&mod.section==sec)
+													mosub=mod.subject;
+												}
+												var opt=document.createElement("option");
+												opt.innerHTML=mosub;
+												opt.setAttribute("value",mosub);
+												ch.appendChild(opt);
+											}
+										}	
+
+
+										}
+
+
+									}
+									
+										
+											var tempdi=document.getElementById(tempname);
+											var chi=tempdi.childNodes;
+											for(ch of chi){
+												if(ch.getAttribute("name")==tempselname){
+													ch.innerHTML="---";
+												}
+											}
+
+										
+
+								
+									
+
+								}
+								console.log(refmap);
+
+
+
+				}
+				</script>
+
+
+</body>
+</html>

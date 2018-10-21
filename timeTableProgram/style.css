@@ -1,0 +1,100 @@
+body{
+    background:darkcyan;
+    display: inline;
+}
+
+p{
+    text-align:center;
+    color:white;
+    background:darkcyan;
+    border:5px darkgrey;
+    border-style: solid;
+    width:auto;
+    border-radius: 25px;
+   
+
+}
+
+
+
+select{
+    background: ghostwhite;
+    color: brown;
+    height: 25px;
+    width: 75px;
+    text-align: center;
+    margin:5px;
+    border-radius: 10px;
+    text-indent: 2px;
+    font-weight: 900;
+    align-content: center;
+    
+}
+option{
+    background: darkseagreen;
+    color: azure;
+    height: 25px;
+    width: 75px;
+    text-align: center;
+    margin:5px;
+    border-radius: 10px;
+    align-content: center;
+}
+div{
+    align-content: center;
+    background: darkgrey;
+    float:left;
+    width:600px;
+    position: relative;
+    left: 2px;
+    display:block;
+    margin:10px;
+    border-radius: 10px;
+    padding: 10px;
+    
+}
+input{
+    margin:5px;
+    width: 95%;
+    border: solid wheat 2px;
+    border-radius: 5px;
+
+}
+button{
+    margin:5px;
+    width:95%;
+    background:wheat;
+    color:darkgreen;
+    border: solid wheat 2px;
+    border-radius: 5px;
+}
+label{
+    background: lightgreen;
+    color: black;
+    height: 20px;
+    width: 75px;
+    text-align: center;
+    margin:5px;
+    border-radius: 10px;
+    text-indent: 2px;
+    font-weight: 100;
+    display: inline-block ;
+    align-content: center;
+}
+a{  position: relative;
+    background: wheat;
+    color:gray;
+    widows: 200px;
+    text-align: right;
+    font-weight: 600;
+    margin:10px;
+    height: 30px;
+    border: solid gray 2px;
+    border-radius: 5px;
+    top:5px;
+    left:250px;
+    padding: 3px;
+}
+ul{
+    color:whitesmoke;
+}
